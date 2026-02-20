@@ -44,8 +44,24 @@ def parse():
 # Takes in a recipeName and returns it in a form that 
 def parse_handwriting(recipeName: str) -> Union[str | None]:
 	# TODO: implement me
-	return recipeName
+	# replace hyphens and underscores
+	cleaned = recipeName.replace('_', ' ').replace('-', ' ')
+	# strip invalid chars
+	cleaned = re.sub('[^a-zA-Z ]', '', cleaned)
 
+	# turn multi-whitespace into single whitespace
+	# don't think this is needed now we use rsplit
+	# cleaned = re.sub('[ ]+', ' ', cleaned)
+
+	allWords = cleaned.rsplit()
+	allWords = [i.capitalize() for i in allWords]
+
+	result = ' '.join(allWords)
+
+	if len(result) == 0:
+		return None
+
+	return result
 
 # [TASK 2] ====================================================================
 # Endpoint that adds a CookbookEntry to your magical cookbook
