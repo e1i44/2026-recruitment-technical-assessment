@@ -66,7 +66,7 @@ def create_entry():
 		cooktime = data.get('cookTime', '')
 		result = create_ingredient(name, cooktime)
 	else:
-		return 'type must be recipe or ingredient', 400
+		return 'Type must be recipe or ingredient', 400
 	
 	if isinstance(result, CookbookEntry):
 		cookbook.append(result)
@@ -80,7 +80,7 @@ def create_entry():
 def create_ingredient(name: str, cooktime: str):
 	cooktimeval = getInt(cooktime)
 	if cooktimeval < 0:
-		return 'cooktime must be an integer greater than or equal to 0'
+		return 'Cooktime must be an integer greater than or equal to 0'
 	
 	return Ingredient(name, cooktimeval)
 
@@ -100,12 +100,12 @@ def create_recipe(name: str, itemsdata):
 		
 		quantity = getInt(i.quantity)
 		if quantity < 1:
-			return 'quantity must be an integer greater than or equal to 1'
+			return 'Quantity must be an integer greater than or equal to 1'
 
 		items.append(RequiredItem(i.name, quantity))
 
-
 	return Recipe(name, items)
+
 
 # returns the int conversion of a string or -1 on error
 def getInt(input: str):
@@ -113,6 +113,7 @@ def getInt(input: str):
 		return int(input)
 	except:
 		return -1
+
 
 # returns a cookbook item with a given name or None if it doesnt exist
 def search_cookbook(name: str):
@@ -122,8 +123,6 @@ def search_cookbook(name: str):
 		return None
 
 	return items[0]
-
-
 
 
 # [TASK 3] ====================================================================
