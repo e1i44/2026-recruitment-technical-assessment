@@ -43,17 +43,10 @@ def parse():
 # [TASK 1] ====================================================================
 # Takes in a recipeName and returns it in a form that 
 def parse_handwriting(recipeName: str) -> Union[str | None]:
-	# TODO: implement me
-	# replace hyphens and underscores
-	cleaned = recipeName.replace('_', ' ').replace('-', ' ')
-	# strip invalid chars
-	cleaned = re.sub('[^a-zA-Z ]', '', cleaned)
+	spaced = recipeName.replace('_', ' ').replace('-', ' ')
+	stripped = re.sub('[^a-zA-Z ]', '', spaced)
 
-	# turn multi-whitespace into single whitespace
-	# don't think this is needed now we use rsplit
-	# cleaned = re.sub('[ ]+', ' ', cleaned)
-
-	allWords = cleaned.rsplit()
+	allWords = stripped.rsplit()
 	allWords = [i.capitalize() for i in allWords]
 
 	result = ' '.join(allWords)
